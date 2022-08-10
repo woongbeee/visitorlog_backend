@@ -11,11 +11,11 @@ import connection from './model/db.js';
 
 const DB = connection();
 const app = express();
+app.use(cors());
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 await apolloServer.start();
 apolloServer.applyMiddleware({ app });
-app.use(cors());
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT | 8001;
 
 
 app.listen(PORT, () =>
