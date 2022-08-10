@@ -10,18 +10,18 @@ const resolvers = {
     Mutation: {
         addVisitor: async (root, args) => {
             const newVisitor = new Visitors({
-                count: args.count,
                 firstname: args.firstname,
                 lastname: args.lastname,
-                mobile: args.mobile
+                mobile: args.mobile,
+                createAt: args.createAt,
             });
             await newVisitor.save();
-            return newVisitor;
+            return console.log("Success");
         },
 
         deleteVisitor: async (root, args) => {
             await Visitors.findByIdAndDelete(args._id);
-            return "Deleted.";
+            return console.log("Deleted");
         },
 
         updateVisitor: async (root, args) => {
@@ -36,9 +36,9 @@ const resolvers = {
             if (mobile !== undefined) {
                 updateVisitor.mobile = mobile;
             }
-
             const visitor = await Visitors.findByIdAndUpdate(_id, updateVisitor, { new: true });
-            return visitor;
+    
+            return console.log("Updated!");
         },
     }
 }

@@ -5,10 +5,6 @@ const { Schema } = mongoose;
 
 
 const visitorSchema = new Schema({
-    count: {
-        type: Number,
-        required: true,
-    },
     firstname: {
         type: String,
         required: true,
@@ -22,13 +18,9 @@ const visitorSchema = new Schema({
         required: true,
     },
     createAt: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        required: true,
     },
-    updateAt: {
-        type: Date,
-        default: Date.now,
-    }
 
 })
 const Visitors = mongoose.model('Visitors', visitorSchema);
