@@ -32,7 +32,7 @@ const resolvers = {
             }
             if (lastname !== undefined) {
                 updateVisitor.lastname = lastname;
-            }dud
+            }
             if (mobile !== undefined) {
                 updateVisitor.mobile = mobile;
             }
