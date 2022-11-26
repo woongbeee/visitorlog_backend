@@ -8,23 +8,36 @@ const resolvers = {
         },
     },
     Mutation: {
-        addVisitor: async (root, args) => {
-            const newVisitor = new Visitors({
-                firstname: args.firstname,
-                lastname: args.lastname,
-                mobile: args.mobile,
-                createAt: args.createAt,
-            });
-            await newVisitor.save();
-            return console.log("Success");
+        addVisitor: async (_, args) => {
+            try {
+                const newVisitor = new Visitors({
+                    firstname: args.firstname,
+                    lastname: args.lastname,
+                    mobile: args.mobile,
+                    createAt: args.createAt,
+                });
+                if (newVisitor) {
+                    await newVisitor.save();
+                    return newVisitor;
+                }
+            } catch (error) {
+                console.log('Error occured!')
+            } 
+            
         },
 
-        deleteVisitor: async (root, args) => {
-            await Visitors.findByIdAndDelete(args._id);
-            return console.log("Deleted");
+        deleteVisitor: async (_, args) => {
+            try {
+                const deletedVisitor = await Visitors.findByIdAndDelete(args._id);
+                if (deletedVisitor) {
+                    return deletedVisitor
+                }
+            } catch (error) { 
+                console.loe('Error occured')
+            }
         },
 
-        updateVisitor: async (root, args) => {
+        updateVisitor: async (_, args) => {
             const { _id, firstname, lastname, mobile } = args;
             const updateVisitor = {};
             if (firstname !== undefined) {
@@ -36,9 +49,14 @@ const resolvers = {
             if (mobile !== undefined) {
                 updateVisitor.mobile = mobile;
             }
-            const visitor = await Visitors.findByIdAndUpdate(_id, updateVisitor, { new: true });
-    
-            return console.log("Updated!");
+            try {
+                const visitor = await Visitors.findByIdAndUpdate(_id, updateVisitor, { new: true });
+                if (visitor) {
+                    return visitor
+                }
+            } catch (error) {
+                console.log('Error occured')
+            }
         },
     }
 }

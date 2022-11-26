@@ -3,10 +3,10 @@ import { gql } from 'apollo-server';
 const typeDefs = gql
    `type visitor {
     _id:ID
-    firstname: String!
-    lastname: String!
-    mobile:String!
-    createAt:String!
+    firstname: String
+    lastname: String
+    mobile:String
+    createAt:String
     }
 
     type Query {
